@@ -117,6 +117,11 @@ colors@^1.1.2:
   resolved "https://packages.atlassian.com/api/npm/npm-remote/colors/-/colors-1.4.0.tgz#c50491479d4c1bdaed2c9ced32cf7c7dc2360f78"
   integrity sha1-xQSRR51MG9rtLJztMs98fcI2D3g=
 
+dayjs@^1.8.24:
+  version "1.8.24"
+  resolved "https://packages.atlassian.com/api/npm/npm-remote/dayjs/-/dayjs-1.8.24.tgz#2ef8a2ab9425eaf3318fe78825be1c571027488d"
+  integrity sha1-Lviiq5Ql6vMxj+eIJb4cVxAnSI0=
+
 debug@=3.1.0:
   version "3.1.0"
   resolved "https://packages.atlassian.com/api/npm/npm-remote/debug/-/debug-3.1.0.tgz#5bb5a0672628b64149566ba16819e61518c67261"
