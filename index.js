@@ -14,12 +14,12 @@ program
   .requiredOption(
     "-r, --repo <atlassian/atlassian-frontend>",
     "the repo you want to list pull requests from",
-    config.repo
+    config.vars.repo
   )
   .option(
     "-u, --users <user1, user2>",
     "a comma separated list of users you care about",
-    config.users
+    config.vars.users
   );
 
 program
@@ -51,11 +51,11 @@ program.on('--help', () => {
 
 AUTHENTICATION
 In order to connect to bitbucket you'll have to setup an application password and set the 
-BITBUCKET_USERNAME and BITBUCKET_PASSWORD environment variables.
+${auth.BITBUCKET_USERNAME} and ${auth.BITBUCKET_PASSWORD} environment variables.
 
 CONFIGURATION
 It's possible to configure everything via the CLI. But overtime this might become tiresome 
-to always type out the same long command. It's also possible to create a ~/.bitbucket-pullrequests.ini
+to always type out the same long command. It's also possible to create a ${config.CONFIG_FILE}
 config file and to store your configuration defaults in there.
   `);
 });
