@@ -9,9 +9,16 @@ const main = async () => {
   try {
     const username = auth.getUsername();
     const password = auth.getPassword();
+    const repo = "atlassian/atlassian-frontend";
+    const users = ["zzarcon", "Linus Karsai"];
 
     spinner.start();
-    const pullRequests = await api.getPullRequests(username, password);
+    const pullRequests = await api.getPullRequests(
+      username,
+      password,
+      repo,
+      users
+    );
     spinner.stop();
 
     printTable(pullRequests);
