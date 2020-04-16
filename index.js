@@ -1,13 +1,13 @@
 const axios = require("axios");
 const Table = require("cli-table3");
 const ora = require("ora");
+const auth = require("./lib/auth");
 
-const spinner = ora('Loading pull requests 💪');
+const spinner = ora("Loading pull requests 💪");
 const instance = axios.create({
   baseURL: "https://api.bitbucket.org/2.0/",
 });
-
-const getPullRequests = async () => {
+const getPullRequests = async (username, password) => {
   const result = await instance.get(
     "repositories/atlassian/atlassian-frontend/pullrequests",
     {
@@ -15,9 +15,9 @@ const getPullRequests = async () => {
         q: 'author.nickname="zzarcon" AND state="OPEN"',
       },
       auth: {
-        username: process.env.BITBUCKET_USERNAME,
-        password: process.env.BITBUCKET_PASSWORD
-      }
+        username: username,
+        password: password,
+      },
     }
   );
 
@@ -48,10 +48,19 @@ const logPullRequests = (pullRequests) => {
 };
 
 const main = async () => {
-  spinner.start();
-  const pullRequests = await getPullRequests();
-  spinner.stop();
-  printTable(pullRequests);
+  try {
+    const username = auth.getUsername();
+    const password = auth.getPassword();
+
+    spinner.start();
+    const pullRequests = await getPullRequests(username, password);
+    spinner.stop();
+
+    printTable(pullRequests);
+  } catch (err) {
+    spinner.stop();
+    console.log("Something went wrong:", err.message);
+  }
 };
 
 main();
