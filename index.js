@@ -47,7 +47,7 @@ program
 
 program.on('--help', () => {
   console.log('');
-  console.log(`BitbucketPrs is a CLI utility to help you keep track of open PRs for your team.
+  console.log(`Bitbucket PullRequests is a CLI utility to help you keep track of open PRs for your team.
 
 AUTHENTICATION
 In order to connect to bitbucket you'll have to setup an application password and set the 
