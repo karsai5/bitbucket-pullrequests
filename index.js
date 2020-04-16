@@ -26,7 +26,7 @@ program
   .command("list", {isDefault: true})
   .description("list pull requests")
   .action(async () => {
-    const spinner = ora("Loading pull requests 💪").start();
+    const spinner = ora("Getting pull requests 📨").start();
     try {
       const username = auth.getUsername();
       const password = auth.getPassword();
@@ -36,11 +36,11 @@ program
         password,
         program
       );
-      spinner.stop();
+      spinner.succeed();
 
       printTable(pullRequests);
     } catch (err) {
-      spinner.stop();
+      spinner.fail();
       console.log("Something went wrong:", err.message);
     }
   });
