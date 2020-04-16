@@ -1,6 +1,8 @@
 const axios = require("axios");
-var Table = require("cli-table3");
+const Table = require("cli-table3");
+const ora = require("ora");
 
+const spinner = ora('Loading pull requests 💪');
 const instance = axios.create({
   baseURL: "https://api.bitbucket.org/2.0/",
 });
@@ -46,7 +48,9 @@ const logPullRequests = (pullRequests) => {
 };
 
 const main = async () => {
+  spinner.start();
   const pullRequests = await getPullRequests();
+  spinner.stop();
   printTable(pullRequests);
 };
 
