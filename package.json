@@ -1,5 +1,6 @@
 {
-  "name": "team-prs",
+  "name": "bb-prs",
+  "bin": "./index.js",
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",

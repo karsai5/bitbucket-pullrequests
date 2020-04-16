@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 const ora = require("ora");
 const auth = require("./lib/auth");
 const printTable = require("./lib/printTable");
