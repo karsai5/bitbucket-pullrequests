@@ -7,11 +7,6 @@ const listCommand = (program) => {
   program
     .command("list", { isDefault: true })
     .description("list pull requests")
-    .requiredOption(
-      "-r, --repo <atlassian/atlassian-frontend>",
-      "the repo you want to list pull requests from",
-      config.vars.repo
-    )
     .option(
       "-t, --title <search string>",
       "Filter PRs that contain string in title",
@@ -22,10 +17,10 @@ const listCommand = (program) => {
       "a comma separated list of users you care about",
       config.vars.users
     )
-    .action(async (params) => {
+    .action(async (commandObj) => {
       const spinner = ora("Getting pull requests 📨").start();
       try {
-        const pullRequests = await api.getPullRequests(params);
+        const pullRequests = await api.getPullRequests(commandObj.parent.repo, commandObj.users, commandObj.title);
         spinner.succeed();
 
         printTable(pullRequests);

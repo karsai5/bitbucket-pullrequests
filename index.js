@@ -7,6 +7,11 @@ const listCommand = require("./src/listCommand");
 
 const program = new Command();
 program.version("0.0.1");
+program.requiredOption(
+  "-r, --repo <atlassian/atlassian-frontend>",
+  "the repo you want to list pull requests from",
+  config.vars.repo
+);
 
 listCommand(program);
 

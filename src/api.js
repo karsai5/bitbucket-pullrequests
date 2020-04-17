@@ -21,25 +21,22 @@ generateTitleQuery = (titleSearchString) => {
   return `title~"${titleSearchString}" AND `;
 };
 
-const getPullRequests = async (program) => {
+const getPullRequests = async (repo, users, title) => {
   const username = auth.getUsername();
   const password = auth.getPassword();
 
-  const result = await instance.get(
-    `repositories/${program.repo}/pullrequests`,
-    {
-      params: {
-        q: `${generateNicknameQuery(program.users)}${generateTitleQuery(
-          program.title
-        )}state="OPEN"`,
-        sort: "-updated_on",
-      },
-      auth: {
-        username: username,
-        password: password,
-      },
-    }
-  );
+  const result = await instance.get(`repositories/${repo}/pullrequests`, {
+    params: {
+      q: `${generateNicknameQuery(users)}${generateTitleQuery(
+        title
+      )} state="OPEN"`,
+      sort: "-updated_on",
+    },
+    auth: {
+      username: username,
+      password: password,
+    },
+  });
 
   return result.data.values;
 };
