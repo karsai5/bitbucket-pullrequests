@@ -10,10 +10,15 @@ const openCommand = (program) => {
     .action(async (id, commandObj) => {
       const detailsSpinner = ora("Getting info about pull request 📝");
       const filesSpinner = ora("Getting file diffs");
+      const commentsSpinner = ora("Getting comments 💬");
 
       try {
         const prAsync = api.getPullRequest(commandObj.parent.repo, id);
         const diffStatAsync = api.getPullRequestDiffStat(
+          commandObj.parent.repo,
+          id
+        );
+        const commentsAsync = api.getPullRequestComments(
           commandObj.parent.repo,
           id
         );
@@ -62,8 +67,19 @@ Last updated: ${dayjs(pr.updated_on).fromNow()}
             );
           }
         });
+
+        console.log("");
+        console.log(chalk.bgWhite(chalk.black("Comments")));
+        commentsSpinner.start();
+        const comments = await commentsAsync;
+        commentsSpinner.stop();
+        comments.values.map(comment => {
+          console.log(`- [${comment.user.display_name}] ${comment.content.raw.split('\n').join('')}`);
+        });
       } catch (err) {
         detailsSpinner.fail();
+        filesSpinner.fail();
+        commentsSpinner.fail();
         console.log("Something went wrong:", err.message);
       }
     });

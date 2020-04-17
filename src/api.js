@@ -67,8 +67,22 @@ const getPullRequestDiffStat = async (repo, id) => {
   return result.data;
 }
 
+const getPullRequestComments = async (repo, id) => {
+  const username = auth.getUsername();
+  const password = auth.getPassword();
+
+  const result = await instance.get(`repositories/${repo}/pullrequests/${id}/comments`, {
+    auth: {
+      username: username,
+      password: password,
+    },
+  });
+  return result.data;
+}
+
 module.exports = {
   getPullRequests,
   getPullRequest,
   getPullRequestDiffStat,
+  getPullRequestComments,
 };
