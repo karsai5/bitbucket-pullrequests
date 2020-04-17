@@ -10,7 +10,7 @@ const infoCommand = require("./src/infoCommand");
 const program = new Command();
 program.version("0.0.1");
 program.requiredOption(
-  "-r, --repo <atlassian/atlassian-frontend>",
+  "-r, --repo <workspace/slug>",
   "the repo you want to list pull requests from",
   config.vars.repo
 );
