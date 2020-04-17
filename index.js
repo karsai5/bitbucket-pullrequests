@@ -4,6 +4,7 @@ const auth = require("./src/auth");
 const config = require("./src/config");
 const { Command } = require("commander");
 const listCommand = require("./src/listCommand");
+const openCommand = require("./src/openCommand");
 
 const program = new Command();
 program.version("0.0.1");
@@ -14,6 +15,7 @@ program.requiredOption(
 );
 
 listCommand(program);
+openCommand(program);
 
 program.on("--help", () => {
   console.log("");

@@ -41,6 +41,20 @@ const getPullRequests = async (repo, users, title) => {
   return result.data.values;
 };
 
+const getPullRequest = async (repo, id) => {
+  const username = auth.getUsername();
+  const password = auth.getPassword();
+
+  const result = await instance.get(`repositories/${repo}/pullrequests/${id}/`, {
+    auth: {
+      username: username,
+      password: password,
+    },
+  });
+  return result.data;
+}
+
 module.exports = {
   getPullRequests,
+  getPullRequest,
 };
