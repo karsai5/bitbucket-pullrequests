@@ -28,19 +28,12 @@ program
   );
 
 program
-  .command("list", {isDefault: true})
+  .command("list", { isDefault: true })
   .description("list pull requests")
   .action(async () => {
     const spinner = ora("Getting pull requests 📨").start();
     try {
-      const username = auth.getUsername();
-      const password = auth.getPassword();
-
-      const pullRequests = await api.getPullRequests(
-        username,
-        password,
-        program
-      );
+      const pullRequests = await api.getPullRequests(program);
       spinner.succeed();
 
       printTable(pullRequests);
@@ -50,8 +43,8 @@ program
     }
   });
 
-program.on('--help', () => {
-  console.log('');
+program.on("--help", () => {
+  console.log("");
   console.log(`Bitbucket PullRequests is a CLI utility to help you keep track of open PRs for your team.
 
 AUTHENTICATION
