@@ -17,6 +17,11 @@ program
     config.vars.repo
   )
   .option(
+    "-t, --title <search string>",
+    "Filter PRs that contain string in title",
+    config.vars.title
+  )
+  .option(
     "-u, --users <user1, user2>",
     "a comma separated list of users you care about",
     config.vars.users
